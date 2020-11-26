@@ -487,7 +487,8 @@ def generarResumen(nombreAlgoritmoAComparar,CompararConOtros,engine,metadata,ord
                 inner join datos_ejecucion on datos_ejecucion.id = resultado_ejecucion.id_ejecucion
                 where datos_ejecucion.parametros ILIKE :instancia
                 and nombre_algoritmo = :nomalg
-                group by datos_ejecucion.parametros"""
+                group by datos_ejecucion.parametros
+                limit 1"""
 
         #Solicitar datos desde la Base de Datos
         res = []
