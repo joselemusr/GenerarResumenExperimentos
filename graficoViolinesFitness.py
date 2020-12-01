@@ -5,7 +5,6 @@ Created on Sat Nov 14 13:39:13 2020
 @author: felip
 """
 
-
 import os
 import numpy as np
 import datetime as dt
@@ -28,6 +27,8 @@ import matplotlib.pyplot as plt
 from scipy import stats # importando scipy.stats
 from matplotlib import pyplot as plt 
 import pandas
+
+import shutil
 
 def generarDataGraficos(experimentos,engine,metadata,orden,directory,nombre_algoritmo,repair,Init):
     
@@ -57,7 +58,45 @@ def generarDataGraficos(experimentos,engine,metadata,orden,directory,nombre_algo
                     resultado.write(str(result[0])+','+result[1].split("_")[2]+'\n')
             resultado.close()
             
-            
+
+
+
+def moverDataGraficos(path,RutaDestino):
+    MHs = os.listdir(path) 
+    for mh in MHs:
+        if mh.split('.')[0] == "desktop":
+            continue
+        print(mh)
+        directorioMH = path + mh
+        Inits = os.listdir(directorioMH) 
+        for init in Inits:
+            if init.split('.')[0] == "desktop":
+                continue
+            print(init)
+            directorioInit = directorioMH + "/" + init
+            repairs = os.listdir(directorioInit) 
+            for repair in repairs:
+                if repair.split('.')[0] == "desktop":
+                    continue
+                print(repair)
+                directorioRepair = directorioInit + "/" + repair
+                dgs = os.listdir(directorioRepair)     
+                for dg in dgs:
+                    if dg.split('.')[0] == "desktop":
+                        continue
+                    print(dg)
+                    directorioDg = directorioRepair + "/" + dg + "/dg/"
+                    ArchivosEnElDirectorio = os.listdir(directorioDg)
+                    for archivo in ArchivosEnElDirectorio:
+                        if archivo.split('.')[0] == "desktop":
+                            continue
+                        extension = archivo.split('.')[1]
+                        if extension =="csv":
+                            shutil.copy(directorioDg + archivo, RutaDestino + archivo)
+             
+
+
+
 def generarGraficoViolin(directory,nombre_algoritmo,orden,repair,Init):
 
     for instancia in orden:

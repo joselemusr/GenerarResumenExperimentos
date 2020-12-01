@@ -16,6 +16,7 @@ import graficosExplorVsExplot as gee
 import generarResumenPorcentajeExplorExplot as gtee
 #import generarGraficoAcciones as ga
 import graficoViolinesFitness as gvf
+import generarAnalisisEstadistico as gae
 
 #Credenciales
 config = configparser.ConfigParser()
@@ -151,7 +152,7 @@ instancias = [
 # ,['HHO_SCP_BCL1','HHO_SCP_MIR2','HHO_SCP_QL1','HHO_SCP_QL2','HHO_SCP_QL3']
 # ,['WOA_SCP_BCL1','WOA_SCP_MIR2','WOA_SCP_QL1','WOA_SCP_QL2','WOA_SCP_QL3']
 # ]
-experimentos = [
+experimentos4 = [
 #['GWO_SCP_BCL1_CPU_S','GWO_SCP_MIR2_CPU_S','GWO_SCP_QL1_CPU_S','GWO_SCP_QL2_CPU_S','GWO_SCP_QL3_CPU_S','GWO_SCP_QL4_CPU_S','GWO_SCP_QL5_CPU_S']
 ['GWO_SCP_BCL1_CPU_C','GWO_SCP_MIR2_CPU_C','GWO_SCP_QL1_CPU_C','GWO_SCP_QL2_CPU_C','GWO_SCP_QL3_CPU_C','GWO_SCP_QL4_CPU_C','GWO_SCP_QL5_CPU_C']
 #,['SCA_SCP_BCL1_CPU_S','SCA_SCP_MIR2_CPU_S','SCA_SCP_QL1_CPU_S','SCA_SCP_QL2_CPU_S','SCA_SCP_QL3_CPU_S','SCA_SCP_QL4_CPU_S','SCA_SCP_QL5_CPU_S'] 
@@ -163,8 +164,10 @@ experimentos = [
 ]
 
 experimentos = [
-['SCA_SCP_BCL1_CPU_C','SCA_SCP_MIR2_CPU_C','SCA_SCP_QL1_CPU_C','SCA_SCP_QL2_CPU_C','SCA_SCP_QL3_CPU_C','SCA_SCP_QL4_CPU_C','SCA_SCP_QL5_CPU_C']
-#,['WOA_SCP_BCL1_CPU_S','WOA_SCP_MIR2_CPU_S','WOA_SCP_QL1_CPU_S','WOA_SCP_QL2_CPU_S','WOA_SCP_QL3_CPU_S','WOA_SCP_QL4_CPU_S','WOA_SCP_QL5_CPU_S']
+#['SCA_SCP_BCL1_CPU_C','SCA_SCP_MIR2_CPU_C','SCA_SCP_QL1_CPU_C','SCA_SCP_QL2_CPU_C','SCA_SCP_QL3_CPU_C','SCA_SCP_QL4_CPU_C','SCA_SCP_QL5_CPU_C']
+['HHO_SCP_BCL1_CPU_C','HHO_SCP_MIR2_CPU_C','HHO_SCP_QL1_CPU_C','HHO_SCP_QL2_CPU_C','HHO_SCP_QL3_CPU_C','HHO_SCP_QL4_CPU_C','HHO_SCP_QL5_CPU_C']
+,['WOA_SCP_BCL1_CPU_S','WOA_SCP_MIR2_CPU_S','WOA_SCP_QL1_CPU_S','WOA_SCP_QL2_CPU_S','WOA_SCP_QL3_CPU_S','WOA_SCP_QL4_CPU_S','WOA_SCP_QL5_CPU_S']
+,['SCA_SCP_BCL1_CPU_C','SCA_SCP_MIR2_CPU_C','SCA_SCP_QL1_CPU_C','SCA_SCP_QL2_CPU_C','SCA_SCP_QL3_CPU_C','SCA_SCP_QL4_CPU_C','SCA_SCP_QL5_CPU_C']
 ,['GWO_SCP_BCL1_CPU_C','GWO_SCP_MIR2_CPU_C','GWO_SCP_QL1_CPU_C','GWO_SCP_QL2_CPU_C','GWO_SCP_QL3_CPU_C','GWO_SCP_QL4_CPU_C','GWO_SCP_QL5_CPU_C']
 ]
 
@@ -220,9 +223,15 @@ generarGraficoAcciones = False
 promedioacciones = False
 
 # graficos de violines, posee dos etapas: generacion de data con un archivo csv, generacion de grafico violin a partir de dicha data csv
-generarDataGraficos = True
-generarGraficosViolin = True
-generarGraficosBoxPlot = True
+generarDataGraficos = False
+generarGraficosViolin = False
+generarGraficosBoxPlot = False
+
+#Para generar tabla de análisis esdisticos
+generarTestEstadistico = True
+RutaDestino = "Data/"
+directoryAnalisis = "TablaTestEstadisticos"
+
 
 
 # Generar Tablas resumen
@@ -311,6 +320,7 @@ if generarTablaExplorExplot == True:
         for j in range(len(experimentos[i])):
             gtee.generarResumenPorcentaje(experimentos[i][j],engine,metadata,orden,file)
     file.close()
+    print(f"Se han generado las tablas de Exploración y Explotación en: {time.time()-inicio}")
 
 # if generarGraficoAcciones == True:
 #     for i in range(len(experimentos)):
@@ -326,6 +336,7 @@ if generarTablaExplorExplot == True:
 #             ga.generarGraficoAcciones(experimentos[i][j],engine,metadata,orden,directory,promedioacciones)
             
 if generarDataGraficos == True:
+    inicio = time.time()
     for i in range(len(experimentos)):
         MH = experimentos[i][0].split("_")[0]
         repair = experimentos[i][0].split("_")[4].replace('C','Complex').replace('S','Simple')
@@ -340,8 +351,13 @@ if generarDataGraficos == True:
             print("Se ha creado el directorio: %s " % directory)
 
         gvf.generarDataGraficos(experimentos[i],engine,metadata,orden,directory,MH,repair,Init)
+
+    gvf.moverDataGraficos(path,RutaDestino)
+
+    print(f"Se han generado la data de graficos en: {time.time()-inicio}")
         
 if generarGraficosViolin == True:
+    inicio = time.time()
     for i in range(len(experimentos)):
 
         MH = experimentos[i][0].split("_")[0]
@@ -350,14 +366,19 @@ if generarGraficosViolin == True:
         directory = path + MH + "/" + Init + "/"
         
         gvf.generarGraficoViolin(directory,MH,orden,repair,Init)
-        
-# if generarGraficosBoxPlot == True:
-#     for i in range(len(experimentos)):
-#         MH = experimentos[i][0].replace('_SCP_BCL1_CPU_C','').replace('_SCP_BCL1_CPU_S','')
-#         directory = path + MH + "/" + Init
-#         directory = "Graficos_Violin"+"/"+experimentos[i][0].split("_")[0]+"-"+experimentos[i][0].split("_")[4]
-        
-#         tipo="boxplot"
-#         gvf.generarGraficoBoxPlot(directory,experimentos[i][0].split("_")[0],orden,tipo)
-        
 
+    print(f"Se han generado los graficos de Violin en: {time.time()-inicio}")
+
+if generarTestEstadistico == True:
+    inicio = time.time()
+    for i in range(len(experimentos)):
+        algoritmos = []
+        for j in range(len(experimentos[i])):
+            algoritmos.append(experimentos[i][j].split("_")[2])
+            
+            
+            experimento = experimentos[i][j].split("_")[0]
+        
+        gae.generarAnalisisEstadistico(directoryAnalisis,orden,algoritmos,experimento)
+
+    print(f"Se han generado las tablas de Test Estadisticos en: {time.time()-inicio}")
