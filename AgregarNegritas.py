@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
 import os
-ArchivoNegritas = "archivoTablaResumen_WOA_Negritas.txt"
-df = pd.read_csv(r"C:\Users\José Lemus Romani\Google Drive\2.- Universidad\2.- Doctorado\7mo Semestre\0.- Git\GenerarResumenExperimentos\archivoTablaResumen_WOA.csv")
+ArchivoNegritas = "TablaResumen\\archivoTablaResumen_GWO_Negritas.txt"
+df = pd.read_csv(r"TablaResumen\archivoTablaResumen_GWO.csv")
 csvMatrix = df.to_numpy()
 cols = csvMatrix.shape[1]
 filas = csvMatrix.shape[0]
