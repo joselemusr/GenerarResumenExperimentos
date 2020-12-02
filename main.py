@@ -164,11 +164,10 @@ experimentos4 = [
 ]
 
 experimentos = [
-#['SCA_SCP_BCL1_CPU_C','SCA_SCP_MIR2_CPU_C','SCA_SCP_QL1_CPU_C','SCA_SCP_QL2_CPU_C','SCA_SCP_QL3_CPU_C','SCA_SCP_QL4_CPU_C','SCA_SCP_QL5_CPU_C']
-['HHO_SCP_BCL1_CPU_C','HHO_SCP_MIR2_CPU_C','HHO_SCP_QL1_CPU_C','HHO_SCP_QL2_CPU_C','HHO_SCP_QL3_CPU_C','HHO_SCP_QL4_CPU_C','HHO_SCP_QL5_CPU_C']
-,['WOA_SCP_BCL1_CPU_S','WOA_SCP_MIR2_CPU_S','WOA_SCP_QL1_CPU_S','WOA_SCP_QL2_CPU_S','WOA_SCP_QL3_CPU_S','WOA_SCP_QL4_CPU_S','WOA_SCP_QL5_CPU_S']
-,['SCA_SCP_BCL1_CPU_C','SCA_SCP_MIR2_CPU_C','SCA_SCP_QL1_CPU_C','SCA_SCP_QL2_CPU_C','SCA_SCP_QL3_CPU_C','SCA_SCP_QL4_CPU_C','SCA_SCP_QL5_CPU_C']
-,['GWO_SCP_BCL1_CPU_C','GWO_SCP_MIR2_CPU_C','GWO_SCP_QL1_CPU_C','GWO_SCP_QL2_CPU_C','GWO_SCP_QL3_CPU_C','GWO_SCP_QL4_CPU_C','GWO_SCP_QL5_CPU_C']
+['HHO_SCP_BCL1_CPU_C','HHO_SCP_QL1_CPU_C','HHO_SCP_QL2_CPU_C','HHO_SCP_QL3_CPU_C','HHO_SCP_QL4_CPU_C','HHO_SCP_QL5_CPU_C']
+,['WOA_SCP_BCL1_CPU_C','WOA_SCP_QL1_CPU_C','WOA_SCP_QL2_CPU_C','WOA_SCP_QL3_CPU_C','WOA_SCP_QL4_CPU_C','WOA_SCP_QL5_CPU_C']
+,['SCA_SCP_BCL1_CPU_C','SCA_SCP_QL1_CPU_C','SCA_SCP_QL2_CPU_C','SCA_SCP_QL3_CPU_C','SCA_SCP_QL4_CPU_C','SCA_SCP_QL5_CPU_C']
+,['GWO_SCP_BCL1_CPU_C','GWO_SCP_QL1_CPU_C','GWO_SCP_QL2_CPU_C','GWO_SCP_QL3_CPU_C','GWO_SCP_QL4_CPU_C','GWO_SCP_QL5_CPU_C']
 ]
 
 experimentos3 = [
@@ -191,7 +190,7 @@ Init = "Rand" #"Zeros"
 
 
 #Para Generar Tablas resumen
-generarTablasResumen = False
+generarTablasResumen = True
 directoryTablasResumen = "archivoTablaResumen.txt"
 CompararConOtros = False
 
@@ -215,7 +214,7 @@ generarGraficosExplorVsExplot = False
 generarGraficosDiversidad = False
 
 #Para generar tabla Explor vs Explot
-generarTablaExplorExplot = False
+generarTablaExplorExplot = True
 directoryTablasExplorExplot = "archivoTablaExplorExplot.txt"
 
 #Para generar Grafico de acciones seleccionadas tanto en exploracion con en explotacion
@@ -223,7 +222,7 @@ generarGraficoAcciones = False
 promedioacciones = False
 
 # graficos de violines, posee dos etapas: generacion de data con un archivo csv, generacion de grafico violin a partir de dicha data csv
-generarDataGraficos = False
+generarDataGraficos = True
 generarGraficosViolin = False
 generarGraficosBoxPlot = False
 
